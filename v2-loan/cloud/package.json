@@ -1,0 +1,18 @@
+{
+  "name": "cloud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.mjs"
+  },
+  "keywords": [],
+  "author": "Loan Phan",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@influxdata/influxdb-client": "^1.35.0",
+    "express": "^4.21.1"
+  }
+}
