@@ -1,11 +1,11 @@
 console.log('Server starting...');
 // 1. Import express and influx client
 import express from 'express';
-import { InfluxDB, Point, QueryApi} from '@influxdata/influxdb-client';
+import { InfluxDB, Point } from '@influxdata/influxdb-client';
 
 const app = express();
 const HOST = "127.0.0.1";
-const PORT = 3000;
+const PORT = 3001;
 
 // 2. Define a GET endpoint that accepts a "value" query parameter
 // app.get('/data', (req, res) => {
