@@ -43,5 +43,5 @@ The **IoT Temperature Monitoring System** is a web application that collects, st
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/<your-username>/<your-repository>.git
-   cd <your-repository>
+   git clone https://github.com/loanphanthithuy/diot-groupb.git
+   cd smart-temp
