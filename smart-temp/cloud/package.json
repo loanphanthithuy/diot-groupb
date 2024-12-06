@@ -2,10 +2,10 @@
   "name": "cloud",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.mjs"
+    "start": "nodemon --inspect src/server.mjs"
   },
   "keywords": [],
   "author": "Loan Phan",
@@ -14,5 +14,8 @@
   "dependencies": {
     "@influxdata/influxdb-client": "^1.35.0",
     "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }
