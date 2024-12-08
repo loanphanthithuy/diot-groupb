@@ -82,20 +82,13 @@ function validateTemperature(req, res, next) {
 // Define endpoint to retrieve the Data
 
 app.get('/temp', async (req, res) => {
-    const location  = req.query.location;
-    if (!location) {
-        res.status(400).send('Missing query parameters "location"');
-        return;
-    }
     const query = `
     from(bucket: "${DB_BUCKET}")
     |> range(start: 0)
     |> filter(fn: (r) => r._measurement == "qparams")
     |> filter(fn: (r) => r._field == "value")
-    |> filter(fn: (r) => r.location == "${location}")
     |> keep(columns: ["_time", "_value", "location"])
     `;
-    
     try {
         const data = [];
         const rows = await QUERY_API.collectRows(query);
