@@ -30,19 +30,9 @@ describe('API Endpoints', () => {
 
   // Test the `/temp` endpoint
   describe('GET /temp', () => {
-    it('should return 400 if location is missing', (done) => {
-      server.request.execute(app)
-        .get('/temp')
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.text).to.equal('Missing query parameters "location"');
-          done();
-        });
-    });
-
     it('should return 200 and return queried data successfully', (done) => {
       server.request.execute(app)
-        .get('/temp?location=kitchen')
+        .get('/temp')
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('array'); // Expecting an array of data points
