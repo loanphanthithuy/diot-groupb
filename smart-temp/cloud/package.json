@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.mjs"
+    "start": "node --env-file=.env src/server.mjs",
+    "dev": "node --env-file=.env --watch-path=src src/server.mjs"
   },
   "keywords": [],
   "author": "Loan Phan",
@@ -13,6 +14,7 @@
   "type": "module",
   "dependencies": {
     "@influxdata/influxdb-client": "^1.35.0",
+    "dotenv": "^16.4.7",
     "express": "^4.21.1"
   }
 }
