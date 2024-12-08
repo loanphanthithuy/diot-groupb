@@ -93,7 +93,7 @@ app.get('/temp', async (req, res) => {
     |> filter(fn: (r) => r._measurement == "qparams")
     |> filter(fn: (r) => r._field == "value")
     |> filter(fn: (r) => r.location == "${location}")
-    |> keep(columns: ["_time", "_value"])
+    |> keep(columns: ["_time", "_value", "location"])
     `;
     
     try {
