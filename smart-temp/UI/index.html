@@ -3,113 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your warm sauna</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Temperature Monitoring System</title>
   <style>
     body {
+      margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
-      margin: 20px;
+      background-color: #f4f4f9;
     }
-    .container {
-      max-width: 800px;
-      margin: auto;
+    header {
+      text-align: center;
+      background-color: #282c34;
+      color: white;
+      padding: 1rem 0;
     }
-    .current-temp {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 20px;
+    .iframe-container {
+      display: flex;
+      flex-direction: column; /* Stack the dashboards vertically */
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      height: 100vh; /* Make the container take full viewport height */
     }
-    canvas {
-      margin-top: 20px;
+    iframe {
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px; /* Add some space between the dashboards */
+      width: 90%; /* Set to 90% width */
+    }
+    /* Specific styles for the gauge and line graph */
+    .gauge {
+      height: 25vh; /* Set height to 30% of the viewport height */
+    }
+    .line-graph {
+      height: 50vh; /* Set height to 60% of the viewport height */
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="current-temp">
-      Current Temperature: <span id="current-temp">Loading...</span>°C
-    </div>
-    <canvas id="temp-chart" width="800" height="400"></canvas>
+  <header>
+    <h1>Welcome to Temperature Monitoring System Demo UI</h1>
+  </header>
+  <div class="iframe-container">
+    <iframe
+      src="http://localhost:3000/d-solo/be6c53rqqx69sf/new-dashboard?orgId=1&from=1733678218874&to=1733699818874&timezone=browser&panelId=1&__feature.dashboardSceneSolo"
+      title="Current Temperature"
+      class="gauge"
+    >
+      Your browser does not support iframes.
+    </iframe>
+    <iframe
+      src="http://localhost:3000/d-solo/be6c53rqqx69sf/new-dashboard?orgId=1&from=1733678218874&to=1733699818874&timezone=browser&panelId=2&__feature.dashboardSceneSolo"
+      title="Temperature History"
+      class="line-graph"
+    >
+      Your browser does not support iframes.
+    </iframe>
   </div>
-
-  <script>
-    // Function to fetch temperature data from API
-    async function fetchTemperatureData() {
-      try {
-        const response = await fetch('http://51.120.10.183/api/v1/temp');
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.error("Error fetching temperature data:", error);
-        return null;
-      }
-    }
-
-    // Function to update the UI
-    async function updateUI() {
-      const data = await fetchTemperatureData();
-
-      if (!data || !data.length) {
-        document.getElementById('current-temp').textContent = "N/A";
-        return;
-      }
-
-      // Get the latest temperature
-      const latestTemp = data[data.length - 1];
-      document.getElementById('current-temp').textContent = latestTemp.value;
-
-      // Prepare data for the chart
-      const timestamps = data.map(item => new Date(item.timestamp).toLocaleString());
-      const temperatures = data.map(item => item.value);
-
-      // Create or update the chart
-      renderChart(timestamps, temperatures);
-    }
-
-    // Function to render the chart
-    function renderChart(labels, data) {
-      const ctx = document.getElementById('temp-chart').getContext('2d');
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Temperature (°C)',
-            data: data,
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderWidth: 2,
-            tension: 0.4,
-          }]
-        },
-        options: {
-          scales: {
-            x: {
-              title: {
-                display: true,
-                text: 'Time',
-              }
-            },
-            y: {
-              title: {
-                display: true,
-                text: 'Temperature (°C)',
-              },
-              beginAtZero: false
-            }
-          }
-        }
-      });
-    }
-
-    // Initialize the UI
-    updateUI();
-
-    // Refresh data every 30 seconds
-    setInterval(updateUI, 30000);
-  </script>
 </body>
 </html>
